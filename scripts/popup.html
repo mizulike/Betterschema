@@ -1,10 +1,21 @@
 <html>
+  <head>
+    <link rel="stylesheet" href="popup.css">
+    <meta charset="utf-8">
+  </head>
   <body>
     <form id="presetForm">
-      <label for="preset" style="text-align: center; width: 100%;">PRESET</label><br>
-      <input type="text" name="preset" id="preset" style="height: 40px;"><br>
-      <input type="submit" value="Update" id="submit" style="width: 100%; margin-top: 5px; height: 40px; cursor: pointer;">
+      <input type="text" name="preset" id="preset" placeholder="Skriv nytt preset..." style="height: 40px; width: 100%;"><br>
+      <input type="submit" value="Ändra" id="submit" style="width: 100%; margin-top: 5px; height: 40px; cursor: pointer;">
     </form>
+
+    <hr>
+
+    <label for="checkbox" style="font-size: 16px;">Ladda schema automatiskt:</label><br>
+    <label class="switch">
+      <input type="checkbox" id="checkbox">
+      <span class="slider round"></span>
+    </label>
 
     <script src="popup.js"></script>
   </body>
