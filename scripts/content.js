@@ -80,6 +80,28 @@ function add_presets() {
             week = document.getElementsByClassName("w-menu-item w-selected")[1].querySelector('span').innerHTML.split(",")[0].split(".")[1].split(" ")[0];
             matsedel(week);
         });
+
+        weekSelection = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div:nth-child(2) > div.w-panel-footer > div:nth-child(1) > div:nth-child(2) > div > div > input");
+        weekSelectionButton = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div:nth-child(2) > div.w-panel-footer > div:nth-child(1) > div:nth-child(2) > div > div > button");
+        weekSelection2 = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div:nth-child(2) > div.w-panel-footer > div:nth-child(1) > div:nth-child(2) > div > div > ul");
+
+        weekSelection.addEventListener("click", function(){
+            week = document.getElementsByClassName("w-menu-item w-selected")[1].querySelector('span').innerHTML.split(",")[0].split(".")[1].split(" ")[0];
+            matsedel(week);
+            console.log(week);
+        });
+
+        weekSelectionButton.addEventListener("click", function(){
+            week = document.getElementsByClassName("w-menu-item w-selected")[1].querySelector('span').innerHTML.split(",")[0].split(".")[1].split(" ")[0];
+            matsedel(week);
+            console.log(week);
+        });
+
+        weekSelection2.addEventListener("click", function(){
+            week = document.getElementsByClassName("w-menu-item w-selected")[1].querySelector('span').innerHTML.split(",")[0].split(".")[1].split(" ")[0];
+            matsedel(week);
+            console.log(week);
+        });
     }
     else {
         setTimeout(add_presets, 100);
