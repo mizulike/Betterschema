@@ -1,6 +1,11 @@
 let food = [];
 let presetValue = "";
 
+chrome.storage.sync.get([ "automaticLoad" ], function(result){
+    console.log(result.automaticLoad);
+    main(result.automaticLoad);
+})
+
 // Clones the style of 'el2' into 'el1'
 function cloneStyle(el1, el2) {
     const styles = window.getComputedStyle(el2);
@@ -18,7 +23,8 @@ function cloneStyle(el1, el2) {
 }
 
 // Locates the 'period' element and clones it turning it into a presets button
-function main() {
+function main(automatic) {
+    console.log(automatic);
     var period = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div:nth-child(2) > div.w-panel-footer > div:nth-child(1) > div:nth-child(7)");
     if (period) {
         clone = period.cloneNode(true);
@@ -50,6 +56,8 @@ function main() {
 
         buttonPlace.replaceWith(Button);
 
+        
+
         // Dictates action when preset is clicked
         Button.addEventListener('click', function(event) {
             inputBox = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div:nth-child(2) > div.w-panel-footer > div:nth-child(1) > div:nth-child(6) > div > div > input");
@@ -66,6 +74,8 @@ function main() {
             week = document.getElementsByClassName("w-menu-item w-selected")[1].querySelector('span').innerHTML.split(",")[0].split(".")[1].split(" ")[0];
             matsedel(week);
         });
+
+        
 
         weekSelection = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div:nth-child(2) > div.w-panel-footer > div:nth-child(1) > div:nth-child(2) > div > div > input");
         weekSelectionButton = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div:nth-child(2) > div.w-panel-footer > div:nth-child(1) > div:nth-child(2) > div > div > button");
@@ -89,13 +99,23 @@ function main() {
             console.log(week);
         });
 
+        if (automatic) {
+            setTimeout(function(){
+                Button.click();
+            }, 10);
+        }
+
+        
+
     }
     else {
-        setTimeout(main, 100);
+        setTimeout(function(){
+            main(automatic);
+        }, 100);
     }
 }
 
-main();
+// main();
 
 // Create a new KeyboardEvent
 var backspaceEvent = new KeyboardEvent('keydown', {
