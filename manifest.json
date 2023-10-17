@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Betterschema",
-  "version": "1.0",
-  "description": "Gör det skola24 inte kunde ;)",
+  "version": "1.1",
+  "description": "Gör det Skola24 inte kunde ;)",
   "permissions": [
     "storage"
   ],
