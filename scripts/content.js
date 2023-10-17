@@ -1,13 +1,6 @@
 let food = [];
 let presetValue = "";
 
-const favicon = document.createElement("link");
-favicon.rel = "icon";
-favicon.type = "image/x-icon";
-favicon.href = "schema.ico";
-document.body.appendChild(favicon);
-
-
 // Clones the style of 'el2' into 'el1'
 function cloneStyle(el1, el2) {
     const styles = window.getComputedStyle(el2);
@@ -25,7 +18,7 @@ function cloneStyle(el1, el2) {
 }
 
 // Locates the 'period' element and clones it turning it into a presets button
-function add_presets() {
+function main() {
     var period = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div:nth-child(2) > div.w-panel-footer > div:nth-child(1) > div:nth-child(7)");
     if (period) {
         clone = period.cloneNode(true);
@@ -52,27 +45,20 @@ function add_presets() {
             Button.innerHTML = presetValue;
         });
           
-        // Button.innerHTML = presetValue
         Button.style.textAlign = 'center';
         Button.style.cursor = 'pointer';
-        Button.class = Button.class + ' test';
 
         buttonPlace.replaceWith(Button);
 
         // Dictates action when preset is clicked
         Button.addEventListener('click', function(event) {
-            // console.log("Button clicked!");
             inputBox = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div:nth-child(2) > div.w-panel-footer > div:nth-child(1) > div:nth-child(6) > div > div > input");
             inputBox.value = Button.innerHTML + 'a';
             inputBox.focus();
             document.execCommand('delete', false, null);
-            // document.execCommand('enter', false, null);
-
-            // dispatchEvent(backspaceEvent);
-            // dispatchEvent(enterEvent);
             
             inputButton = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div:nth-child(2) > div.w-panel-footer > div:nth-child(1) > div:nth-child(6) > div > div > Button");
-            // // inputButton.disabled = false;
+
             setTimeout(function() {
                 inputButton.click();
             }, 0);
@@ -102,13 +88,14 @@ function add_presets() {
             matsedel(week);
             console.log(week);
         });
+
     }
     else {
-        setTimeout(add_presets, 100);
+        setTimeout(main, 100);
     }
 }
 
-add_presets();
+main();
 
 // Create a new KeyboardEvent
 var backspaceEvent = new KeyboardEvent('keydown', {
@@ -183,39 +170,42 @@ async function matsedel(week) {
 
 function replaceWithFood() {
     dayHeader = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div.w-modal.w-modal-xs.open > div > div > div.w-modal-body > div > div > div.w-panel-header > h2").innerHTML.split(" ")[0];
-    subjectContent = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div.w-modal.w-modal-xs.open > div > div > div.w-modal-body > div > div > div.w-panel-content.w-panel-content-flat > ul > li > div > div.w-item-secondary-text > span");
-    subjectTitle = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div.w-modal.w-modal-xs.open > div > div > div.w-modal-body > div > div > div.w-panel-content.w-panel-content-flat > ul > li > div > div.w-item-primary-text > span");
-    // console.log(dayHeader);
-    // console.log(presetValue);
-    // console.log(subjectTitle.innerHTML)
+    subjectContent = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div.w-modal.w-modal-xs.open > div > div > div.w-modal-body > div > div > div.w-panel-content.w-panel-content-flat > ul > li > div");
 
-    if (subjectTitle.innerHTML.toLowerCase() == presetValue.toLowerCase()) {
-        switch (dayHeader) {
-            case "Måndag":
-                subjectContent.innerHTML = food[0];
-                break;
-    
-            case "Tisdag":
-                subjectContent.innerHTML = food[1];
-                break;
-    
-            case "Onsdag":
-                subjectContent.innerHTML = food[2];
-                break;
-    
-            case "Torsdag":
-                subjectContent.innerHTML = food[3];
-                break;
-    
-            case "Fredag":
-                subjectContent.innerHTML = food[4];
-                break;
-        }
-    }  
+    switch (dayHeader) {
+        case "Måndag":
+            subjectContent.innerHTML = food[0];
+            break;
+
+        case "Tisdag":
+            subjectContent.innerHTML = food[1];
+            break;
+
+        case "Onsdag":
+            subjectContent.innerHTML = food[2];
+            break;
+
+        case "Torsdag":
+            subjectContent.innerHTML = food[3];
+            break;
+
+        case "Fredag":
+            subjectContent.innerHTML = food[4];
+            break;
+    }
 }
 
-// When user clicks anywhere, we run replaceWithFood
-document.addEventListener("click", replaceWithFood);
+
+// Run replaceWithFood when user clicks a rectangle with grey fill (exclusive to lunch)
+document.addEventListener('click', function(e) {
+    e = e || window.event;
+    var target = e.target;
+
+    if (target.style.fill == "rgb(192, 192, 192)") {
+        replaceWithFood();
+    }
+}, false);
+
 
 chrome.storage.onChanged.addListener((changes, namespace) => {
     presetButton = document.getElementById("presetButton");
@@ -228,4 +218,29 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
         presetButton.innerHTML = presetValue;
     });
 });
-  
+
+function themify() {
+    toggle = true;
+    rectangles = document.querySelectorAll('rect');
+    texts = document.querySelectorAll('text');
+
+    texts.forEach(text => {
+        text.style.fill = "rgb(255, 255, 255)";
+    })
+
+    // Iterate through each <rect> element
+    rectangles.forEach(rectangle => {
+        // Check if the current <rect> has the attribute box-type="lesson"
+        if (rectangle.getAttribute('box-type') === 'Lesson') {
+            // Do something with the matching <rect> element
+            if (toggle) {
+                rectangle.style.fill = "rgb(0, 0, 0)";
+                toggle = false;
+            }
+            else {
+                rectangle.style.fill = "rgb(255, 165, 0)";
+                toggle = true;
+            }
+        }
+    });
+};
