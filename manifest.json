@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Betterschema",
+  "version": "0.1",
+  "description": "Gör det SKOLA24 inte kunde ;)",
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_popup": "scripts/popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": ["scripts/content.js"],
+      "matches": [
+        "https://web.skola24.se/timetable/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+      "48": "bs_48.png"
+  }
+}
