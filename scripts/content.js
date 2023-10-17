@@ -1,5 +1,11 @@
 let food = [];
-// matsedel();
+let presetValue = "";
+
+const favicon = document.createElement("link");
+favicon.rel = "icon";
+favicon.type = "image/x-icon";
+favicon.href = "schema.ico";
+document.body.appendChild(favicon);
 
 
 // Clones the style of 'el2' into 'el1'
@@ -31,6 +37,7 @@ function add_presets() {
         document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div:nth-child(2) > div.w-panel-footer > div:nth-child(1) > div:nth-child(8) > div > div > button").remove();
         
         Button = document.createElement('a');
+        Button.id = 'presetButton';
 
         buttonPlace = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div:nth-child(2) > div.w-panel-footer > div:nth-child(1) > div:nth-child(8) > div > div > input");
         buttonStyle = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div:nth-child(2) > div.w-panel-footer > div:nth-child(1) > div:nth-child(1) > div > div > input");
@@ -39,10 +46,10 @@ function add_presets() {
 
         chrome.storage.sync.get(["presetValue"], function(result) {
             // result is an object with the keys you requested
-            var presetValue = result.presetValue;
+            presetValue = result.presetValue;
           
             // Now you can use the value
-            Button.innerHTML = presetValue + 'a';
+            Button.innerHTML = presetValue;
         });
           
         // Button.innerHTML = presetValue
@@ -56,7 +63,7 @@ function add_presets() {
         Button.addEventListener('click', function(event) {
             // console.log("Button clicked!");
             inputBox = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div:nth-child(2) > div.w-panel-footer > div:nth-child(1) > div:nth-child(6) > div > div > input");
-            inputBox.value = 'TE22bb';
+            inputBox.value = Button.innerHTML + 'a';
             inputBox.focus();
             document.execCommand('delete', false, null);
             // document.execCommand('enter', false, null);
@@ -156,9 +163,11 @@ function replaceWithFood() {
     dayHeader = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div.w-modal.w-modal-xs.open > div > div > div.w-modal-body > div > div > div.w-panel-header > h2").innerHTML.split(" ")[0];
     subjectContent = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div.w-modal.w-modal-xs.open > div > div > div.w-modal-body > div > div > div.w-panel-content.w-panel-content-flat > ul > li > div > div.w-item-secondary-text > span");
     subjectTitle = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div.w-modal.w-modal-xs.open > div > div > div.w-modal-body > div > div > div.w-panel-content.w-panel-content-flat > ul > li > div > div.w-item-primary-text > span");
-    console.log(dayHeader);
+    // console.log(dayHeader);
+    // console.log(presetValue);
+    // console.log(subjectTitle.innerHTML)
 
-    if (subjectTitle.innerHTML == "TE22b") {
+    if (subjectTitle.innerHTML.toLowerCase() == presetValue.toLowerCase()) {
         switch (dayHeader) {
             case "Måndag":
                 subjectContent.innerHTML = food[0];
@@ -186,3 +195,15 @@ function replaceWithFood() {
 // When user clicks anywhere, we run replaceWithFood
 document.addEventListener("click", replaceWithFood);
 
+chrome.storage.onChanged.addListener((changes, namespace) => {
+    presetButton = document.getElementById("presetButton");
+
+    chrome.storage.sync.get(["presetValue"], function(result) {
+        // result is an object with the keys you requested
+        presetValue = result.presetValue;
+      
+        // Now you can use the value
+        presetButton.innerHTML = presetValue;
+    });
+});
+  
