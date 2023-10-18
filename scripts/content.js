@@ -2,7 +2,7 @@ let food = [];
 let presetValue = "";
 
 chrome.storage.sync.get([ "automaticLoad" ], function(result){
-    console.log(result.automaticLoad);
+    // console.log(result.automaticLoad);
     main(result.automaticLoad);
 })
 
@@ -24,7 +24,7 @@ function cloneStyle(el1, el2) {
 
 // Locates the 'period' element and clones it turning it into a presets button
 function main(automatic) {
-    console.log(automatic);
+    // console.log(automatic);
     var period = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div:nth-child(2) > div.w-panel-footer > div:nth-child(1) > div:nth-child(7)");
     if (period) {
         clone = period.cloneNode(true);
@@ -40,7 +40,7 @@ function main(automatic) {
 
         buttonPlace = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div:nth-child(2) > div.w-panel-footer > div:nth-child(1) > div:nth-child(8) > div > div > input");
         buttonStyle = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div:nth-child(2) > div.w-panel-footer > div:nth-child(1) > div:nth-child(1) > div > div > input");
-        console.log(buttonPlace)
+        // console.log(buttonPlace)
         cloneStyle(Button, buttonStyle);
 
         chrome.storage.sync.get(["presetValue"], function(result) {
@@ -146,7 +146,7 @@ function getMatsedel(week) {
         })
         .then(data => {
         // Handle the JSON data
-        console.log(data); // Output: { "Mat": "Ugnstekt fisk med kokt potatis och remouladsås." }
+        // console.log(data); // Output: { "Mat": "Ugnstekt fisk med kokt potatis och remouladsås." }
         return data['veckomat']
         })
         .catch(error => {
@@ -178,10 +178,10 @@ async function matsedel(week) {
         food = await getMatsedel(week);
         // console.log('Food:', food);
 
-        console.log(food);
+        // console.log(food);
 
         week = document.getElementsByClassName("w-menu-item w-selected")[1].querySelector('span').innerHTML.split(",")[0].split(".")[1].split(" ")[0];
-        console.log(week);
+        // console.log(week);
 
     } catch (error) {
         console.error('Main error:', error);
