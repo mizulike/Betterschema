@@ -1,4 +1,6 @@
 # Betterschema
+[Betterschema - Chrome Web Store](https://chrome.google.com/webstore/detail/betterschema/fkcgfacmlabdabalhfnknekgdhnopech) \
+\
 Förgylla din schemaupplevelse med helt nya funktioner, såsom:
 
 - Se matsedel direkt i schemat
