@@ -26,3 +26,20 @@ chrome.storage.sync.get([ "automaticLoad" ], function(result){
         checkbox.checked = true;
     }
 })
+
+checkbox2 = document.getElementById("checkbox2");
+
+checkbox2.addEventListener("change", function(){
+    if (checkbox2.checked) {
+        chrome.storage.sync.set({ "timeMarker": true });
+    }
+    else {
+        chrome.storage.sync.set({ "timeMarker": false });
+    }
+});
+
+chrome.storage.sync.get([ "timeMarker" ], function(result){
+    if (result.timeMarker) {
+        checkbox2.checked = true;
+    }
+})

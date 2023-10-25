@@ -90,7 +90,6 @@ function main(automatic) {
         weekSelectionButton.addEventListener("click", function(){
             week = document.getElementsByClassName("w-menu-item w-selected")[1].querySelector('span').innerHTML.split(",")[0].split(".")[1].split(" ")[0];
             matsedel(week);
-            console.log(week);
         });
 
         weekSelection2.addEventListener("click", function(){
@@ -239,28 +238,4 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
     });
 });
 
-function themify() {
-    toggle = true;
-    rectangles = document.querySelectorAll('rect');
-    texts = document.querySelectorAll('text');
-
-    texts.forEach(text => {
-        text.style.fill = "rgb(255, 255, 255)";
-    })
-
-    // Iterate through each <rect> element
-    rectangles.forEach(rectangle => {
-        // Check if the current <rect> has the attribute box-type="lesson"
-        if (rectangle.getAttribute('box-type') === 'Lesson') {
-            // Do something with the matching <rect> element
-            if (toggle) {
-                rectangle.style.fill = "rgb(0, 0, 0)";
-                toggle = false;
-            }
-            else {
-                rectangle.style.fill = "rgb(255, 165, 0)";
-                toggle = true;
-            }
-        }
-    });
-};
+// chrome.storage.sync.remove("timeMarker");
