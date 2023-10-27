@@ -47,6 +47,17 @@ function dynamicTime() {
 
         let lessons = rectangleDataArray.filter(rectData => rectData.boxType === "Lesson");
 
+        let dayHeaders = rectangleDataArray.filter(rectData => rectData.boxType === "HeadingDay");
+
+        dayHeaderWidth = dayHeaders[0].width;
+        dayHeaderX = [];
+
+        for (let i = 0; i < 5; i++) {
+            dayHeaderX[i] = dayHeaders[i].x;
+        }
+
+        timetableDayHeight = getHeight();
+
         let groupedByX = {};
 
         // Grouping rectangles by 'x' value
@@ -66,10 +77,10 @@ function dynamicTime() {
             for (let i = 0; i < 5; i++) {
                 rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     
-                rect.setAttribute("x", xPos[i]);
+                rect.setAttribute("x", dayHeaderX[i]);
                 rect.setAttribute("y", "30");
-                rect.setAttribute("width", "226");
-                rect.setAttribute("height", "425");
+                rect.setAttribute("width", String(dayHeaderWidth));
+                rect.setAttribute("height", String(timetableDayHeight));
                 rect.setAttribute("fill", "rgba(204, 204, 204, 0.5)");
                 rect.setAttribute("class", "timeMarker");
                 rect.setAttribute("pointer-events", "none");
@@ -92,10 +103,10 @@ function dynamicTime() {
             for (let i = 0; i < day; i++) {
                 rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     
-                rect.setAttribute("x", xPos[i]);
+                rect.setAttribute("x", dayHeaderX[i]);
                 rect.setAttribute("y", "30");
-                rect.setAttribute("width", "226");
-                rect.setAttribute("height", "425");
+                rect.setAttribute("width", String(dayHeaderWidth));
+                rect.setAttribute("height", String(timetableDayHeight));
                 rect.setAttribute("fill", "rgba(204, 204, 204, 0.5)");
                 rect.setAttribute("class", "timeMarker");
                 rect.setAttribute("pointer-events", "none");
@@ -108,9 +119,9 @@ function dynamicTime() {
             rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     
             // Set the attributes for the rect element
-            rect.setAttribute("x", xPos[day]);
+            rect.setAttribute("x", dayHeaderX[day]);
             rect.setAttribute("y", "30");
-            rect.setAttribute("width", "226");
+            rect.setAttribute("width", String(dayHeaderWidth));
             rect.setAttribute("height", timeToHeight());
             rect.setAttribute("fill", "rgba(204, 204, 204, 0.5)");
             rect.setAttribute("class", "timeMarker");
@@ -152,13 +163,13 @@ function timeToHeight() {
     // if (8 <= hours && hours < 16) {
         totalMinutes = (hours-8)*60 + minutes;
 
-        if (totalMinutes * pixelsPerMinute < 425) {
+        if (totalMinutes * pixelsPerMinute < getHeight()) {
             return String(totalMinutes * pixelsPerMinute);
         }
         
     // }
     else {
-        return hours < 8 ? "0" : "425";
+        return hours < 8 ? "0" : getHeight();
     }
 }
 
@@ -191,6 +202,36 @@ function getCurrentWeek() {
     var weekNumber = Math.ceil(days / 7);
     
     return String(weekNumber);
+}
+
+function getHeight() {
+    let timetable = document.querySelector("#timetableElement > svg");
+
+    // Use querySelectorAll to get all rect elements with box-type of TimetableDay
+    rectangles = timetable.querySelectorAll('rect');
+
+    // console.log(timetable.querySelector('rect[box-type="TimetableDay"]'));
+
+
+    let rectangleDataArray = Array.from(rectangles).map(rect => {
+        return {
+            element: rect,
+            x: rect.getAttribute('x'),
+            y: rect.getAttribute('y'),
+            width: rect.getAttribute('width'),
+            height: rect.getAttribute('height'),
+            fill: rect.style.fill,
+            stroke: rect.style.stroke,
+            boxType: rect.getAttribute('box-type')
+            // ... add any other attributes you need
+        };
+    });
+
+    let timetableDays = rectangleDataArray.filter(rectData => rectData.boxType === "TimetableDay");
+
+    timetableDayHeight = timetableDays[0].height;
+
+    return timetableDayHeight;
 }
 
 chrome.storage.sync.get([ "timeMarker" ], function(result){
