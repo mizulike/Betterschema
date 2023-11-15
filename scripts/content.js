@@ -95,7 +95,6 @@ function main(automatic) {
         weekSelection2.addEventListener("click", function(){
             week = document.getElementsByClassName("w-menu-item w-selected")[1].querySelector('span').innerHTML.split(",")[0].split(".")[1].split(" ")[0];
             matsedel(week);
-            console.log(week);
         });
 
         if (automatic) {
