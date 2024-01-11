@@ -130,7 +130,7 @@ var enterEvent = new KeyboardEvent('keydown', {
 });
 
 function getMatsedel(week) {
-    const url = 'https://712e33c2-202b-412f-9668-0a79e28a97e2-00-1osjzdc05q4zc.global.replit.dev/matsedel_week/' + week;
+    const url = 'https://matsedelapi.replit.app/matsedel_week/' + week;
 
     // Make a GET request using the fetch function
     return fetch(url)
