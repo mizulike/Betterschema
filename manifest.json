@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Betterschema",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "Gör det Skola24 inte kunde ;)",
   "permissions": [
     "storage"
@@ -11,7 +11,7 @@
   },
   "content_scripts": [
     {
-      "js": ["scripts/content.js", "scripts/notes.js", "scripts/themes.js", "scripts/dynamicTime.js"],
+      "js": ["scripts/content.js", "scripts/notes.js", "scripts/themes.js", "scripts/dynamicTime.js", "scripts/matsedel.js"],
       "css": ["scripts/notes.css"],
       "matches": [
         "https://web.skola24.se/timetable/*"

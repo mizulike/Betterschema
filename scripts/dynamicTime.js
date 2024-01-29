@@ -194,14 +194,27 @@ function getSelectedWeek() {
 }
 
 function getCurrentWeek() {
-    currentDate = new Date();
-    startDate = new Date(currentDate.getFullYear(), 0, 1);
-    var days = Math.floor((currentDate - startDate) /
-        (24 * 60 * 60 * 1000));
-    
-    var weekNumber = Math.ceil(days / 7);
-    
+    var currentDate = new Date();
+    var startDate = new Date(currentDate.getFullYear(), 0, 1);
+
+    // Calculate the number of days between the start date and the current date
+    var days = Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000));
+
+    // Get the day of the week for January 1st
+    var startDay = startDate.getDay();
+
+    // Adjust for leap years
+    var leapYearAdjustment = 0;
+    if (startDay > 4) {
+        leapYearAdjustment = 1;
+    }
+
+    // Calculate the week number
+    var weekNumber = Math.ceil((days + startDay + 1 + leapYearAdjustment) / 7);
+
+    // console.log(weekNumber);
     return String(weekNumber);
+
 }
 
 function getHeight() {
