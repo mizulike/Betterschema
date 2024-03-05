@@ -43,3 +43,20 @@ chrome.storage.sync.get([ "timeMarker" ], function(result){
         checkbox2.checked = true;
     }
 })
+
+darkmode = document.getElementById('darkmode');
+
+darkmode.addEventListener("change", function(){
+    if (darkmode.checked) {
+        chrome.storage.sync.set({ "darkMode": true });
+    }
+    else {
+        chrome.storage.sync.set({ "darkMode": false });
+    }
+});
+
+chrome.storage.sync.get([ "darkMode" ], function(result){
+    if (result.darkMode) {
+        darkmode.checked = true;
+    }
+})
