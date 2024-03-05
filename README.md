@@ -7,6 +7,7 @@ Förgylla din schemaupplevelse med helt nya funktioner, såsom:
 - Ha sparade presets som laddar direkt när sidan öppnas
 - Skriv personliga kommentarer för dina lektioner
 - Tona passerade lektioner
+- Mörkt läge
 ---
 Bakad med kärlek,\
 Timothy Flynn
