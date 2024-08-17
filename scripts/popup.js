@@ -1,3 +1,8 @@
+var sliders = document.getElementsByClassName('slider');
+for (let i = 0; i < sliders.length; i++) {
+    sliders[i].classList.add('new-transition-properties');
+}
+
 document.getElementById("presetForm").addEventListener("submit", function(event) {
     event.preventDefault(); // Prevents the default form submission
     var presetValue = document.getElementById("preset").value;

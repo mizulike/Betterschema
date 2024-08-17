@@ -37,7 +37,7 @@ matsedelMain();
 
 
 function getMatsedel(week) {
-    const url = 'https://matsedelapi.replit.app/matsedel_week/' + week;
+    const url = 'https://api.hokuspookus.xyz/matsedel/matsedel_week?week=' + week;
 
     // Make a GET request using the fetch function
     return fetch(url)
@@ -76,23 +76,23 @@ function replaceWithFood() {
 
     switch (dayHeader) {
         case "Måndag":
-            subjectContent.innerHTML = food[0];
+            subjectContent.innerHTML = food['0'][0] + '<br><br>' + food['0'][1];
             break;
 
         case "Tisdag":
-            subjectContent.innerHTML = food[1];
+            subjectContent.innerHTML = food['1'][0] + '<br><br>' + food['1'][1];            
             break;
 
         case "Onsdag":
-            subjectContent.innerHTML = food[2];
+            subjectContent.innerHTML = food['2'][0] + '<br><br>' + food['2'][1];            
             break;
 
         case "Torsdag":
-            subjectContent.innerHTML = food[3];
+            subjectContent.innerHTML = food['3'][0] + '<br><br>' + food['3'][1];
             break;
 
         case "Fredag":
-            subjectContent.innerHTML = food[4];
+            subjectContent.innerHTML = food['4'][0] + '<br><br>' + food['4'][1];            
             break;
     }
 }

@@ -50,7 +50,7 @@ document.addEventListener('click', function(e) {
         w_panel.style.marginBottom = "0px";
 
         if (first) {
-            console.log("FIRST!");
+            console.log("NOTES LOADED!!");
             // Create a new div element
             editableTextbox = document.createElement('div');
 

@@ -93,3 +93,8 @@ input:checked + .slider:before {
 		background-position: 0% 50%;
 	}
 }
+
+.new-transition-properties::before {
+  -webkit-transition: 0s;
+  transition: 0s;
+}

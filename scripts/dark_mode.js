@@ -51,11 +51,11 @@ function toggleDarkMode(enabled) {
     }
 }
 
-document.addEventListener('keydown', (event) => {
-    if (event.key == '<') {
-        toggleDarkMode();
-    }
-}, false);
+// document.addEventListener('keydown', (event) => {
+//     if (event.key == '<') {
+//         toggleDarkMode();
+//     }
+// }, false);
 
 chrome.storage.sync.get([ "darkMode" ], function(result){
     if (result.darkMode) {

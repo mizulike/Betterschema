@@ -69,6 +69,8 @@ function main(automatic) {
             setTimeout(function() {
                 inputButton.click();
             }, 0);
+
+            inputBox.blur();
         });
 
         if (automatic) {

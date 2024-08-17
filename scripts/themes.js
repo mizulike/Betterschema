@@ -31,7 +31,7 @@ function pastelify() {
     rectangles.forEach(rectangle => {
         // Check if the current <rect> has the attribute box-type="lesson"
         if (rectangle.getAttribute('box-type') === 'Lesson') {
-            rectangle.style.fill = toPastel(rectangle.style.fill, 0.5);
+            rectangle.style.fill = toPastel(rectangle.style.fill, 0.4);
         }
     });
 }
