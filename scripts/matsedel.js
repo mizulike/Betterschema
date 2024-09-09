@@ -37,7 +37,7 @@ matsedelMain();
 
 
 function getMatsedel(week) {
-    const url = 'https://api.hokuspookus.xyz/matsedel/matsedel_week?week=' + week;
+    const url = 'https://lcoqvsjk55.execute-api.eu-north-1.amazonaws.com/production/matsedel_week?week=' + week;
 
     // Make a GET request using the fetch function
     return fetch(url)
