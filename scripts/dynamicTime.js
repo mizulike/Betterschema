@@ -7,12 +7,15 @@ let xPos = [
 ]
 
 function dynamicTime() {
+    // console.log(getSelectedWeek());
+    // console.log(getCurrentWeek());
     currentDate = new Date();
 
     let day = currentDate.getDay()-1;
     // let day = 2;
 
-    if (document.querySelector("#timetableElement > svg")) {
+    if (document.querySelector(".w-timetable > svg")) {
+        // console.log("FOUND!");
         try {
             for (let timeMarker of document.querySelectorAll(".timeMarker")) {
                 timeMarker.remove();
@@ -21,7 +24,7 @@ function dynamicTime() {
             console.log("can't delete");
         };
 
-        let timetable = document.querySelector("#timetableElement > svg");
+        let timetable = document.querySelector(".w-timetable > svg");
 
         // Use querySelectorAll to get all rect elements with box-type of TimetableDay
         rectangles = timetable.querySelectorAll('rect');
@@ -71,9 +74,10 @@ function dynamicTime() {
         // Convert the groupedByX object to separate arrays
         lessons = Object.values(groupedByX);
 
-        let svgContainer = document.querySelector("#timetableElement > svg");
+        let svgContainer = document.querySelector(".w-timetable > svg");
 
         if (getSelectedWeek() < getCurrentWeek()) {
+            console.log("getSelectedWeek() < getCurrentWeek()")
             for (let i = 0; i < 5; i++) {
                 rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     
@@ -90,6 +94,8 @@ function dynamicTime() {
             }
         }
         else if (getSelectedWeek() == getCurrentWeek()) {
+            // console.log("getSelectedWeek() == getCurrentWeek()");
+
             // lessons[day].forEach(rect => {
             //     y = parseInt(rect.y);
             //     height = parseInt(rect.height);
@@ -133,6 +139,7 @@ function dynamicTime() {
         setTimeout(dynamicTime, 100);
     }
     else {
+        // console.log("NOT FOUND");
         setTimeout(dynamicTime, 10);
     }
 }
@@ -218,7 +225,7 @@ function getCurrentWeek() {
 }
 
 function getHeight() {
-    let timetable = document.querySelector("#timetableElement > svg");
+    let timetable = document.querySelector(".w-timetable > svg");
 
     // Use querySelectorAll to get all rect elements with box-type of TimetableDay
     rectangles = timetable.querySelectorAll('rect');
@@ -254,6 +261,9 @@ chrome.storage.sync.get([ "timeMarker" ], function(result){
     // }
     // else {
         if (result.timeMarker) {
+            console.log("Activating time marker");
+            // setTimeout(function() {
+            // }, 1000);
             dynamicTime();
         }
     // } 

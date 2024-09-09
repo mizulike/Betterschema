@@ -65,3 +65,27 @@ chrome.storage.sync.get([ "darkMode" ], function(result){
         darkmode.checked = true;
     }
 })
+
+
+// customcolors = document.getElementById('customcolors');
+
+// customcolors.addEventListener("change", function(){
+//     if (customcolors.checked) {
+//         chrome.storage.sync.set({ "customcolors": true });
+//     }
+//     else {
+//         chrome.storage.sync.set({ "customcolors": false });
+//     }
+// });
+
+// chrome.storage.sync.get([ "customcolors" ], function(result){
+//     if (result.customcolors) {
+//         customcolors.checked = true;
+//     }
+// })
+
+setTimeout(function() {
+    for (let i = 0; i < sliders.length; i++) {
+        sliders[i].classList.remove('new-transition-properties');
+    }
+}, 50);
