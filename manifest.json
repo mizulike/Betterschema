@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Betterschema",
-  "version": "1.4.4",
+  "version": "1.5.0",
   "description": "Gör det Skola24 inte kunde ;)",
   "permissions": [
     "storage"
@@ -11,13 +11,14 @@
   },
   "content_scripts": [
     {
-      "js": ["scripts/content.js", 
-      "scripts/notes.js", 
-      "scripts/themes.js", 
-      "scripts/dynamicTime.js", 
-      "scripts/matsedel.js", 
-      "scripts/dark_mode.js",
-      "scripts/color_picker.js"],
+      "js": [
+        "scripts/content.js", 
+        "scripts/notes.js", 
+        "scripts/dynamicTime.js", 
+        "scripts/matsedel.js", 
+        "scripts/dark_mode.js",
+        "scripts/user_count.js"
+      ],
 
       "css": ["scripts/notes.css"],
       "matches": [

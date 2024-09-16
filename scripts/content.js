@@ -26,6 +26,18 @@ function main(automatic) {
     // console.log(automatic);
     var period = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-content > div > div:nth-child(2) > div.w-panel-footer > div:nth-child(1) > div:nth-child(7)");
     if (period) {
+        // USER COUNT ELEMENT
+        // First, select the element
+        let targetElement = document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-header > div > div > h1");
+
+        // Create the new element you want to add
+        let newElement = document.createElement('div');
+        newElement.textContent = '';
+        // You can add any other properties or styles to newElement here
+
+        // Insert the new element after the target element
+        targetElement.insertAdjacentElement('afterend', newElement);
+
         clone = period.cloneNode(true);
         period.after(clone);
 

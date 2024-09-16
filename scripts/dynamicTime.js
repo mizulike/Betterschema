@@ -136,7 +136,7 @@ function dynamicTime() {
             // Append the rect element to the SVG container
             svgContainer.appendChild(rect);
         }
-        setTimeout(dynamicTime, 100);
+        setTimeout(dynamicTime, 3000);
     }
     else {
         // console.log("NOT FOUND");
