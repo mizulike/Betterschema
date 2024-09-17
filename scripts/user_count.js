@@ -69,7 +69,7 @@ async function getUserCount() {
     res = await fetch('https://e7ovapbaoe.execute-api.eu-north-1.amazonaws.com/production');
     let userCount = await res.json();
     
-    document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-header > div > div > div:nth-child(2)").innerHTML = `Online i Betterschema: ${userCount}`;
+    document.querySelector("body > div.w-widget-timetable-viewer > div.w-page-header > div > div > div:nth-child(2)").innerHTML = `Online i Betterschema: ${userCount} st`;
 }
 
 async function main_user_count() {
